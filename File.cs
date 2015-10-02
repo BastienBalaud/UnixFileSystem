@@ -81,7 +81,7 @@ namespace FileSystem
 
 		public bool chmod (int permission)
 		{
-			if (permission <= 7) {
+			if (permission <= 7 && permission >=0) {
 				this.permission = permission;
 				return true;
 			} else {
