@@ -79,9 +79,15 @@ namespace FileSystem
 			return this.name;
 		}
 
-		public void chmod (int permission)
+		public bool chmod (int permission)
 		{
-			this.permission = permission;
+			if (permission <= 7) {
+				this.permission = permission;
+				return true;
+			} else {
+				return false;
+			}
+
 		}
 
 		public bool isFile ()

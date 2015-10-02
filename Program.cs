@@ -85,8 +85,8 @@ namespace FileSystem
 					currentDirectory = (Directory)root;
 					break;
 				case "chmod":
-					if (commande.Length > 1 && int.Parse (commande [1]) < 8) {
-						currentDirectory.chmod (int.Parse (commande [1]));
+					if (commande.Length > 1 && currentDirectory.chmod( int.Parse (commande [1]))) {
+						Console.WriteLine("Droit changé");
 					} else {
 						Console.WriteLine ("Valeur spécifier incorrect");
 					}
