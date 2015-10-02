@@ -38,7 +38,7 @@ namespace FileSystem
 		public File (string name, Directory parrent)
 		{
 			this.name = name;
-			this.permission = 6;
+			this.permission = 4;
 			this.parent = parrent;
 		}
 

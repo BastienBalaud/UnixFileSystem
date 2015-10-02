@@ -37,7 +37,7 @@ namespace FileSystem
 		public Directory () : base ()
 		{
 			this.name = "/";
-			this.permission = 7;
+			this.permission = 4;
 
 			Console.WriteLine ("C# File engine starting...");
 			Console.WriteLine ("Sytem ready");
@@ -55,7 +55,12 @@ namespace FileSystem
 			return false;
 		}
 		public List<File> ls() {
-			return content;
+			if(this.canRead())
+				{
+			return this.content;
+				}else{
+					return null;
+				}
 		}
 		public bool mkdir (string name)
 		{
@@ -114,15 +119,19 @@ namespace FileSystem
 		}
 		public List<File> search(string name)
 		{
-			List<File> result = new List<File> ();
-			foreach (File contenu in content) {
-				if (contenu.name == name) {
-					result.Add (contenu);
+			List<File> result = null ;
+			if (this.canRead ()) {
+				result= new List<File>();
+				foreach (File contenu in content) {
+					if (contenu.name == name && contenu.canRead ()) {
+						result.Add (contenu);
+					}
+					if (contenu.isDirectory () && contenu.canRead ()) {
+						Directory current = (Directory)contenu;
+						result.AddRange (current.search (name));
+					}
 				}
-				if (contenu.isDirectory()) {
-					Directory current = (Directory)contenu;
-					result.AddRange(current.search (name));
-				}
+
 			}
 			return result;
 		}

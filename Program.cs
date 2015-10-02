@@ -56,6 +56,8 @@ namespace FileSystem
 					}
 					break;
 				case "ls":
+					if(currentDirectory.ls() !=null)
+					{
 					foreach (File contenu in currentDirectory.ls()) {
 						if (contenu.isFile ()) {
 							Console.Write ("dir : ");
@@ -65,6 +67,9 @@ namespace FileSystem
 						Console.Write (contenu.getAccess () + " ");
 						Console.Write (contenu.name);
 						Console.WriteLine ();
+						}
+					}else{
+						Console.WriteLine("Vous n'avez pas les droits");
 					}
 					break;
 				case "mkdir":
@@ -82,7 +87,12 @@ namespace FileSystem
 					}
 					break;
 				case "root":
-					currentDirectory = (Directory)root;
+					if(	currentDirectory.parent!=null)
+					{
+						Console.WriteLine(currentDirectory.parent.name);
+					}else{
+						Console.WriteLine ("Vous êtes déjà au bout du monde");
+					}
 					break;
 				case "chmod":
 					if (commande.Length > 1 && currentDirectory.chmod( int.Parse (commande [1]))) {
@@ -117,7 +127,7 @@ namespace FileSystem
 					}
 					break;
 				case "search":
-					if (commande.Length > 1) {
+					if (commande.Length > 1 && currentDirectory.search(commande[1])!=null) {
 						foreach (File result in currentDirectory.search(commande[1])) {
 							Console.WriteLine (result.getPath ());
 						}
