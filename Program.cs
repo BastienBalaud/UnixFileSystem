@@ -108,7 +108,7 @@ namespace FileSystem
 						Console.WriteLine ("Impossible d'effectuer l'action");
 					}
 					break;
-				case "remove":
+				case "delete":
 
 					if (currentDirectory.delete (commande [1])) {
 						Console.WriteLine ("Action réussie");
@@ -138,6 +138,7 @@ namespace FileSystem
 		{
 			commande = commande.Replace ("/", "_");
 			string[] output = commande.Split (delimiterChars);
+			output [0] = output [0].ToLower ();
 			return output;
 		}
 	}
